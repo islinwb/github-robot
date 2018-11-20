@@ -14,7 +14,7 @@ const (
 	CircleAPIURL = "https://circleci.com/api/v1.1/project/github/islinwb/test/build?circle-token="
 )
 
-func SendToCI(body io.Reader) {
+func SendToCI(body []byte) {
 	// currently only support circle ci
 	CIRCLE_API_USER_TOKEN := os.Getenv("CIRCLE_API_USER_TOKEN")
 	glog.Info("going to send test request to circle ci")

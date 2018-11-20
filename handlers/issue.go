@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"github.com/golang/glog"
 	"github.com/google/go-github/github"
+	"io"
 	"io/ioutil"
-	"net/http"
 	"strings"
 )
 
@@ -16,15 +16,11 @@ func (s *Server) handleIssueEvent(client *github.Client) {
 
 }
 
-func (s *Server) handleIssueCommentEvent(r *http.Request) {
+func (s *Server) handleIssueCommentEvent(body []byte) {
 	glog.Infof("Received an IssueComment Event")
 
-	b, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		glog.Errorf("fail to read request body: %v", err)
-	}
 	var prc github.IssueComment
-	err = json.Unmarshal(b, &prc)
+	err := json.Unmarshal(body, &prc)
 	if err != nil {
 		glog.Errorf("fail to unmarshal: %v", err)
 	}
@@ -37,7 +33,7 @@ func (s *Server) handleIssueCommentEvent(r *http.Request) {
 	}
 
 	if retestReg.MatchString(comment) {
-		SendToCI(r.Body)
+		SendToCI(body)
 	} else if testReg.MatchString(comment) {
 		// TODO: trigger particular job(s)
 	}
