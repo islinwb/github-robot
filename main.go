@@ -32,7 +32,7 @@ func NewWebHookServer() *WebHookServer {
 	s := WebHookServer{
 		Address:    "0.0.0.0",
 		Port:       3000,
-		ConfigFile: "/etc/github-robot/config.yaml",
+		ConfigFile: "/etc/github-robot/config.json",
 	}
 	return &s
 }
@@ -40,7 +40,7 @@ func NewWebHookServer() *WebHookServer {
 func (s *WebHookServer) AddFlags(fs *pflag.FlagSet) {
 	fs.StringVar(&s.Address, "address", s.Address, "IP address to serve, 0.0.0.0 by default")
 	fs.Int64Var(&s.Port, "port", s.Port, "Port to listen on, 3000 by default")
-	fs.StringVar(&s.ConfigFile, "config file", s.ConfigFile, "Config file.")
+	fs.StringVar(&s.ConfigFile, "config-file", s.ConfigFile, "Config file.")
 }
 
 func (s *WebHookServer) Run() {
