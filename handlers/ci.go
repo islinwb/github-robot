@@ -11,7 +11,7 @@ import (
 const (
 	CircleCIurl  = "https://circleci.com/hooks/github"
 	ContentType  = "application/x-www-form-urlencoded"
-	CircleAPIURL = "https://circleci.com/api/v1.1/project/github/islinwb/kubeedge/build?circle-token="
+	CircleAPIURL = "https://circleci.com/api/v1.1/project/github/islinwb/test/build?circle-token="
 )
 
 func SendToCI(body io.Reader) {
