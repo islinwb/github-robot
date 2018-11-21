@@ -17,13 +17,13 @@ func (s *Server) handleIssueEvent(client *github.Client) {
 func (s *Server) handleIssueCommentEvent(body []byte) {
 	glog.Infof("Received an IssueComment Event")
 
-	var prc github.IssueComment
+	var prc github.IssueCommentEvent
 	err := json.Unmarshal(body, &prc)
 	if err != nil {
 		glog.Errorf("fail to unmarshal: %v", err)
 	}
 	glog.Infof("prc: %v", prc)
-	comment := *prc.Body
+	comment := *prc.Comment.Body
 
 	if labelReg.MatchString(comment) {
 		labelSlice := strings.Split(comment, " ")
