@@ -51,7 +51,7 @@ func (s *Server) handlePullRequestCommentEvent(r *http.Request) {
 	}
 
 	if retestReg.MatchString(comment) {
-		SendToCI(r.Body)
+		SendToCI()
 	} else if testReg.MatchString(comment) {
 		// TODO: trigger particular job(s)
 	}

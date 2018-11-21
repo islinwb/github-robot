@@ -18,6 +18,7 @@ func (s *Server) handleIssueCommentEvent(body []byte) {
 	glog.Infof("Received an IssueComment Event")
 
 	var prc github.IssueComment
+	glog.Infof("body: %v", body)
 	err := json.Unmarshal(body, &prc)
 	if err != nil {
 		glog.Errorf("fail to unmarshal: %v", err)
