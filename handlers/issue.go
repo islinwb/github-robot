@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"github.com/golang/glog"
 	"github.com/google/go-github/github"
-	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -33,7 +31,7 @@ func (s *Server) handleIssueCommentEvent(body []byte) {
 	}
 
 	if retestReg.MatchString(comment) {
-		SendToCI(body)
+		SendToCI()
 	} else if testReg.MatchString(comment) {
 		// TODO: trigger particular job(s)
 	}
